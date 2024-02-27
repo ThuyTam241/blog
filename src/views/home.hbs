@@ -1,0 +1,178 @@
+{{> header}}
+
+<main class="flex flex-col lg:flex-row w-[80%] mx-auto pt-[136px] pb-[60px]">
+    <!-- Search, Categories and Sort by -->
+    <div class="lg:w-1/3 xl:w-1/4 space-y-10">
+        <!-- Search -->
+        <form action="" method="get"
+            class="flex items-center w-full h-14 px-7 space-x-3 bg-secondary-200 rounded-full hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)] focus-within:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)] transition duration-300 ease-in-out">
+            <input type="search" name="search" placeholder="Search..."
+                class="w-full h-full text-secondary-300 outline-none text-base font-medium font-Hindmadurai" required>
+            <a href="#">
+                <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="fill-primary"
+                        d="M24.6582 21.6162L19.79 16.748C19.5703 16.5283 19.2725 16.4062 18.96 16.4062H18.1641C19.5117 14.6826 20.3125 12.5146 20.3125 10.1562C20.3125 4.5459 15.7666 0 10.1562 0C4.5459 0 0 4.5459 0 10.1562C0 15.7666 4.5459 20.3125 10.1562 20.3125C12.5146 20.3125 14.6826 19.5117 16.4062 18.1641V18.96C16.4062 19.2725 16.5283 19.5703 16.748 19.79L21.6162 24.6582C22.0752 25.1172 22.8174 25.1172 23.2715 24.6582L24.6533 23.2764C25.1123 22.8174 25.1123 22.0752 24.6582 21.6162ZM10.1562 16.4062C6.7041 16.4062 3.90625 13.6133 3.90625 10.1562C3.90625 6.7041 6.69922 3.90625 10.1562 3.90625C13.6084 3.90625 16.4062 6.69922 16.4062 10.1562C16.4062 13.6084 13.6133 16.4062 10.1562 16.4062Z" />
+                </svg>
+            </a>
+        </form>
+
+        <!-- Categories -->
+        <div
+            class="w-full px-7 py-8 bg-secondary-500 rounded-lg hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)] transition duration-300 ease-in-out">
+            <h2 class="mb-5 text-xl font-bold text-primary font-Montserrat">Categories</h2>
+            <ul class="max-h-32 overflow-y-auto lg:max-h-max flex flex-col divide-y-2 divide-secondary-100">
+                <li>
+                    <div class="flex items-center py-2.5">
+                        <input type="checkbox" id="category-1" class="peer hidden">
+                        <label for="category-1"
+                            class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">Travel</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center py-2.5">
+                        <input type="checkbox" id="category-2" class="peer hidden">
+                        <label for="category-2"
+                            class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">Travel</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center py-2.5">
+                        <input type="checkbox" id="category-3" class="peer hidden">
+                        <label for="category-3"
+                            class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">Travel</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Sort by -->
+        <div
+            class="w-full px-7 py-8 bg-secondary-500 rounded-lg hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)] transition duration-300 ease-in-out">
+            <div class="flex items-center mb-5 space-x-4">
+                <h2 class="text-xl font-bold text-primary font-Montserrat">Sort by</h2>
+                <svg width="10" height="20" viewBox="0 0 11 23" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="cursor-pointer hover:rotate-180 transition duration-300 ease-in-out">
+                    <path
+                        d="M3.54682 7.10836V21.8516C3.54682 22.1752 3.80918 22.4375 4.13276 22.4375H6.86714C7.19072 22.4375 7.45307 22.1752 7.45307 21.8516V7.10836H9.70205C10.7461 7.10836 11.2689 5.8461 10.5307 5.10782L6.32861 0.905719C5.87094 0.448053 5.12895 0.448053 4.67133 0.905719L0.469235 5.10782C-0.268997 5.84605 0.253854 7.10836 1.2979 7.10836H3.54682Z"
+                        fill="#111F4D" />
+                </svg>
+            </div>
+            <ul class="divide-y-2 divide-secondary-100">
+                <li>
+                    <div class="flex items-center py-2.5">
+                        <input type="radio" id="sortByTitle" name="sortBy" class="sort-radio peer">
+                        <label for="sortByTitle"
+                            class="sort-label peer-hover:text-secondary-400 peer-checked:text-secondary-400">Title</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center py-2.5">
+                        <input type="radio" id="sortByDate" name="sortBy" class="sort-radio peer" checked>
+                        <label for="sortByDate"
+                            class="sort-label peer-hover:text-secondary-400 peer-checked:text-secondary-400">Date
+                            Created</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center py-2.5">
+                        <input type="radio" id="sortByLikes" name="sortBy" class="sort-radio peer">
+                        <label for="sortByLikes"
+                            class="sort-label peer-hover:text-secondary-400 peer-checked:text-secondary-400">Likes</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- List card and Pagination -->
+    <div class="lg:w-2/3 xl:w-3/4 mt-10 lg:mt-0 lg:ml-10">
+        <!-- List card -->
+        <div class="flex flex-wrap gap-7">
+            <!-- Card -->
+            <div class="card hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)]" onclick="window.location.href='#'">
+                <img src="./image/food.jpg" alt="Photo" class="w-full aspect-[3/2] object-cover">
+                <div class="py-2.5 px-6">
+                    <div class="grid grid-cols-1 grid-row-4 gap-y-1">
+                        <!-- Post Category -->
+                        <div class="flex space-x-2">
+                            <div class="badge">Travel</div>
+                            <div class="badge">Art</div>
+                        </div>
+                        <!-- Post Title -->
+                        <h2 class="text-xl font-bold font-Montserrat text-secondary-300 line-clamp-2">5 Ingredient Spicy
+                            Pork! A fancy-feeling dinner recipe that actually</h2>
+                        <!-- Post Description -->
+                        <p class="text-lg font-medium font-Hindmadurai text-secondary-300 line-clamp-2">5 Ingredient
+                            Spicy Pork! A fancy-feeling dinner recipe that actually comes together fancy-feeling dinner
+                        </p>
+                        <!-- Post Like and Comment -->
+                        <div class="flex space-x-8">
+                            <div class="flex items-center space-x-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    class="w-5 h-5 fill-secondary-200 stroke-primary stroke-2 transition duration-300 ease-in-out">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                </svg>
+                                <span class="text-base font-semibold font-Hindmadurai text-primary">24</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" class="w-5 h-5 stroke-primary stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
+                                </svg>
+                                <span class="text-base font-semibold font-Hindmadurai text-primary">2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-[2px] my-2 bg-secondary-100"></div>
+                    <!-- Author and Date Created-->
+                    <div class="flex items-center space-x-2">
+                        <img src="/image/author-avatar.jpg" alt="User Avatar" class="w-12 h-12 rounded-full">
+                        <div class="flex flex-col">
+                            <h2 class="text-lg font-bold font-Montserrat text-primary">Marina</h2>
+                            <div class="flex items-center space-x-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" class="w-[18px] h-[18px] stroke-secondary-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                <span class="text-base font-normal font-Hindmadurai text-secondary-600">Jan 24,
+                                    2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-10">
+            <a href="#" class="group page">
+                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="group-hover:fill-secondary-200"
+                        d="M8 0.808608V11.1914C8 11.9104 6.97817 12.2704 6.38057 11.762L0.277835 6.57063C-0.0926115 6.2555 -0.0926115 5.74452 0.277835 5.42939L6.38057 0.237991C6.97817 -0.270408 8 0.0896672 8 0.808608Z"
+                        fill="#111F4D" />
+                </svg>
+            </a>
+            <a href="#" class="group page">1</a>
+            <a href="#" class="group page">2</a>
+            <a href="#" class="group page">3</a>
+            <div
+                class="flex items-center justify-center w-10 h-10 bg-secondary-200 text-base font-bold font-Montserrat text-primary">
+                ...</div>
+            <a href="#" class="group page">8</a>
+            <a href="#" class="group page">9</a>
+            <a href="#" class="group page">
+                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="group-hover:fill-secondary-200"
+                        d="M0 11.1914V0.80859C0 0.0896493 1.02183 -0.270386 1.61943 0.237973L7.72217 5.42937C8.09261 5.7445 8.09261 6.25548 7.72217 6.57061L1.61943 11.762C1.02183 12.2704 0 11.9103 0 11.1914Z"
+                        fill="#111F4D" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</main>
+
+{{> footer}}

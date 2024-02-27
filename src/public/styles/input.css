@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-nav {
+        @apply w-24 h-11 rounded-lg border-2 border-primary text-lg font-bold text-primary hover:bg-secondary-400 hover:text-secondary-200 hover:border-secondary-400 transition duration-300 ease-in-out;
+    }
+
+    .card {
+        @apply xl:w-[48.1%] h-auto bg-secondary-200 rounded-lg overflow-hidden cursor-pointer transition duration-300 ease-in-out;
+    }
+
+    .badge {
+        @apply flex items-center justify-center max-w-max px-4 py-2 rounded-[20px] text-base uppercase font-semibold font-Hindmadurai text-secondary-200 bg-secondary-400 transition duration-300 ease-in-out;
+    }
+
+    .page {
+        @apply flex items-center justify-center w-10 h-10 bg-secondary-200 text-base font-bold font-Montserrat text-primary hover:text-secondary-200 hover:bg-secondary-400 transition duration-300 ease-in-out;
+    }
+
+    .sort-radio {
+        @apply w-3 h-3 appearance-none rounded-full cursor-pointer border border-primary checked:border-2 checked:ring-2 checked:ring-secondary-400 checked:border-secondary-500 checked:bg-secondary-400 transition duration-300 ease-in-out;
+    }
+
+    .sort-radio:not(:checked):hover {
+        @apply hover:border-none hover:ring-2 hover:ring-secondary-400;
+    }
+
+    .sort-label {
+        @apply w-full pl-3 font-semibold text-base text-primary font-Hindmadurai cursor-pointer transition duration-300 ease-in-out;
+    }
+
+    .label {
+        @apply absolute left-0 -top-8 text-lg font-medium font-Hindmadurai text-secondary-300 transition duration-300 ease-in-out;
+    }
+
+    .input {
+        @apply w-full p-2.5 rounded-lg outline-none border-2 border-secondary-100 text-base font-normal font-Hindmadurai text-secondary-300 focus:border-primary transition duration-300 ease-in-out;
+    }
+}

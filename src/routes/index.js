@@ -1,7 +1,9 @@
-const postRouter = require('./postRoutes')
+var express = require('express');
+var router = express.Router();
 
-function route(app) {
-    app.use('/views', postRouter)
-}
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index');
+});
 
-module.exports = route;
+module.exports = router;

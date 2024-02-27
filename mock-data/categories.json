@@ -1,0 +1,10 @@
+[
+    {
+      "_id": "category1",
+      "name": "Health"
+    },
+    {
+      "_id": "category2",
+      "name": "Travel"
+    }
+  ]

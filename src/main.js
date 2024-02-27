@@ -1,27 +1,65 @@
 const express = require('express')
-const { engine } = require('express-handlebars')
-const morgan = require('morgan')
-const app = express()
-const port = 3000
-const path = require('path')
-// const route = require('./routes/index')
-// route(app)
+const { engine } = require('express-handlebars');
+const path = require('path')  
+const logger = require('morgan')
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-const db = require('../config/databaseConfig')
-db.connect()
+const app = express();
+const fs = require('fs');
 
-app.use(morgan('combined'))
+const mongo = require('mongodb');
+const monk = require('monk');
+const db = monk('mongodb://localhost:27017/blogDB');
 
-app.engine('.hbs', engine({extname: '.hbs'}))
-app.set('view engine', '.hbs')
-app.set('views', path.join(__dirname, './views'))
+const routes = require('./routes/index');
+const postRoutes = require('./routes/post-routes');
 
-app.use(express.static(path.join(__dirname, './public')))
+const port = 3000;
 
-app.get('/', (req, res) => {
-  res.render('home');
-})
+// Set the view engine to use handlebars
+app.engine('hbs', engine({
+  defaultLayout: 'main',
+  extname: '.hbs'
+}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// ...
+app.use(logger('combined'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
+
+// Register routes
+app.use('/', routes);
+app.use('/posts', postRoutes);
+
+// Catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  console.log(err)
+  res.status(err.status || 500);
+  res.render('error', {
+      message: err,
+      error: {}
+  });
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Personal Blog System are listening on port ${port}`)
 })

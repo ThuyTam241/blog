@@ -8,10 +8,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const fs = require('fs');
 
-const mongo = require('mongodb');
-const monk = require('monk');
-const db = monk('mongodb://localhost:27017/blogDB');
-
 const routes = require('./routes/index');
 const postRoutes = require('./routes/post-routes');
 
@@ -31,13 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-// Make our db accessible to our router
-app.use(function(req,res,next){
-  req.db = db;
-  next();
-});
 
 // Register routes
 app.use('/', routes);

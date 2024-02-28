@@ -21,27 +21,16 @@
             class="w-full px-7 py-8 bg-secondary-500 rounded-lg hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)] transition duration-300 ease-in-out">
             <h2 class="mb-5 text-xl font-bold text-primary font-Montserrat">Categories</h2>
             <ul class="max-h-32 overflow-y-auto lg:max-h-max flex flex-col divide-y-2 divide-secondary-100">
-                <li>
-                    <div class="flex items-center py-2.5">
-                        <input type="checkbox" id="category-1" class="peer hidden">
-                        <label for="category-1"
-                            class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">Travel</label>
-                    </div>
-                </li>
-                <li>
-                    <div class="flex items-center py-2.5">
-                        <input type="checkbox" id="category-2" class="peer hidden">
-                        <label for="category-2"
-                            class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">Travel</label>
-                    </div>
-                </li>
-                <li>
-                    <div class="flex items-center py-2.5">
-                        <input type="checkbox" id="category-3" class="peer hidden">
-                        <label for="category-3"
-                            class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">Travel</label>
-                    </div>
-                </li>
+                {{!-- TODO: create event listener for check box and remove <a></a> --}}
+                {{#each categories}}
+                    <li class="py-2.5">
+                        <a href="?category_id={{_id}}" class="flex items-center">
+                            <input type="checkbox" id="category-1" class="peer hidden">
+                            <label for="category-1"
+                                class="cursor-pointer font-semibold text-base text-primary font-Hindmadurai peer-hover:text-secondary-400 peer-checked:text-secondary-400 transition duration-300 ease-in-out">{{name}}</label>
+                        </a>
+                    </li>
+                {{/each}}
             </ul>
         </div>
 
@@ -96,8 +85,7 @@
                         <div class="grid grid-cols-1 grid-row-4 gap-y-1">
                             <!-- Post Category -->
                             <div class="flex space-x-2">
-                                <div class="badge">Travel</div>
-                                <div class="badge">Art</div>
+                                <div class="badge">{{category.name}}</div>
                             </div>
                             <!-- Post Title -->
                             <h2 class="text-xl font-bold font-Montserrat text-secondary-300 line-clamp-2">{{title}}</h2>

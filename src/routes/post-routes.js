@@ -1,4 +1,6 @@
 var express = require('express');
+const PostDatabaseApi = require('../integration/PostDatabaseApi');
+const CategoryDatabaseApi = require('../integration/CategoryDatabaseApi');
 var router = express.Router();
 
 /* 
@@ -10,12 +12,21 @@ Explain:
 */
 
 /* READ, UPDATE, DELETE posts */
-router.get('/', function(req, res) {
-	const db = req.db;
-	const postCollection = db.get("posts");
-	postCollection.find({}, {}, function(e, docs) {
-		res.render('pages/post/post-collection', {'posts' : docs});
+router.get('/', async (req, res) => {
+	const { category_id } = req.query;
+	let categories = [];
+	await CategoryDatabaseApi.findAll().then((result) => {
+		categories = result
 	});
+	const renderPost = (posts) => {
+		res.render('pages/post/post-collection', {posts: posts, categories: categories});
+	}
+
+	if (category_id) {
+		PostDatabaseApi.findByCategory(category_id).then(renderPost);
+	} else {
+		PostDatabaseApi.findAll().then(renderPost);
+	}
 });
 
 module.exports = router

@@ -13,11 +13,12 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const { username, password, name, email } = req.body;
     const existingUser = await userDatabaseApi.getUserByUsername(username);
+    console.log('existing', existingUser)
     if (existingUser) {
         return res.status(400).send('User already exists');
     }
     await userDatabaseApi.addUser({ username, password, name, email });
-    res.redirect('/login');
+    res.redirect('/users/login');
 });
 
 

@@ -2,11 +2,13 @@
     {
         "_id": "user1",
         "name": "John Doe",
-        "email": "john@example.com"
+        "email": "john@example.com",
+        "password": "12345"
     },
     {
         "_id": "user2",
         "name": "Jane Smith",
-        "email": "jane@example.com"
+        "email": "jane@example.com",
+        "password": "12345"
     }
 ]

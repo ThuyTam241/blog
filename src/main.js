@@ -1,7 +1,8 @@
 const express = require('express')
 const { engine } = require('express-handlebars');
 const path = require('path')  
-const logger = require('morgan')
+const logger = require('morgan');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -10,6 +11,7 @@ const fs = require('fs');
 
 const routes = require('./routes/index');
 const postRoutes = require('./routes/post-routes');
+const userRoutes = require('./routes/user-routes');
 
 const port = 3000;
 
@@ -27,10 +29,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Register routes
 app.use('/', routes);
 app.use('/posts', postRoutes);
+app.use('/users', userRoutes);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

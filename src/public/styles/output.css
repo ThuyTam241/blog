@@ -815,10 +815,6 @@ video {
   margin-left: 3.5rem;
 }
 
-.ml-4{
-  margin-left: 1rem;
-}
-
 .ml-auto{
   margin-left: auto;
 }
@@ -1443,10 +1439,6 @@ video {
   --tw-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
   --tw-shadow-colored: 0 2px 8px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.group:hover .group-hover\:block{
-  display: block;
 }
 
 .group:hover .group-hover\:fill-secondary-200{

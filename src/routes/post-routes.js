@@ -1,23 +1,32 @@
-var express = require('express');
-const PostDatabaseApi = require('../integration/PostDatabaseApi');
-const CategoryDatabaseApi = require('../integration/CategoryDatabaseApi');
-var router = express.Router();
+const express = require('express')
+const router = express.Router()
+const postDatabaseApi = require('../integration/PostDatabaseApi')
+const categoryDatabaseApi = require('../integration/CategoryDatabaseApi')
 
-router.get('/', async (req, res) => {
-	const { category_id } = req.query;
-	let categories = [];
-	await CategoryDatabaseApi.findAll().then((result) => {
-		categories = result
-	});
-	const renderPost = (posts) => {
-		res.render('post-collection', {posts: posts, categories: categories});
-	}
+const postUrls = {
+  allPosts: '',
+  createPosts: '/create',
+  updatePosts: '/update/:id',
+  deletePosts: '/delete/:id',
+}
 
-	if (category_id) {
-		PostDatabaseApi.findByCategory(category_id).then(renderPost);
-	} else {
-		PostDatabaseApi.findAll().then(renderPost);
-	}
-});
+router.get(postUrls.allPosts, async (req, res) => {
+  const { categoryId, searchKey, sortBy } = req.query
 
-module.exports = router
+  let categories = await categoryDatabaseApi.findAll()
+  let posts = []
+
+  if (!!categoryId || !!searchKey || !!sortBy) {
+    posts = await postDatabaseApi.findByCategoryAndSearchKey(categoryId, searchKey, sortBy)
+  } else {
+    posts = await postDatabaseApi.findAll()
+  }
+
+  res.render('post-collection', { posts, categories })
+})
+
+// Publish the routes and URL constants so other modules can use it
+module.exports = {
+  router,
+  postUrls,
+}

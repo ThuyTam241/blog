@@ -1,37 +1,54 @@
-const express = require('express');
-const router = express.Router();
-const userDatabaseApi = require('../integration/UserDatabaseApi');
+const express = require('express')
+const router = express.Router()
+const userDatabaseApi = require('../integration/UserDatabaseApi')
 
-router.get('/login', (req, res) => {
-    res.render('login');
-});
+const authenticationUrls = {
+  login: '/login',
+  register: '/register',
+}
 
-router.get('/register', (req, res) => {
-    res.render('register');
-});
+// Redirect to login page when accessing the /login
+router.get(authenticationUrls.login, (req, res) => {
+  const isUserLoggedIn = !!req.session.loggedInUser
+  if (isUserLoggedIn) {
+    res.redirect('/posts')
+  }
+  res.render('login')
+})
 
-//check user registered
-router.post('/register', async (req, res) => {
-    const { username, password, name, email } = req.body;
-    const existingUser = await userDatabaseApi.getUserByUsername(username);
-    console.log('existing', existingUser)
-    if (existingUser) {
-        return res.status(400).send('User already exists');
-    }
-    await userDatabaseApi.addUser({ username, password, name, email });
-    res.redirect('/users/login');
-});
+// Redirect to register page when accessing the /register
+router.get(authenticationUrls.register, (req, res) => {
+  res.render('register')
+})
 
-//check user login
-router.post('/authenticate', async (req, res) => {
-    const { username, password } = req.body;
-    console.log('username: ' ,username);
-    const existingUser = await userDatabaseApi.getUserByUsername(username);
-    if (existingUser) {
-        req.session.loggedInUser = { username: existingUser.username };
-        res.redirect('/posts');
-    }
-    res.render('login', {message: 'Log in failed'});
-});
+// Request to create new user
+router.post(authenticationUrls.register, async (req, res) => {
+  const { username, password, name, email } = req.body
+  const existingUser = await userDatabaseApi.findByUsername(username)
 
-module.exports = router
+  if (existingUser) {
+    return res.status(400).send('User already exists')
+  }
+
+  await userDatabaseApi.addUser({ username, password, name, email })
+  res.redirect(authenticationUrls.login)
+})
+
+// Verify that the login user is existing in the database
+// If yes, save it to the session and redirect to all posts page
+router.post(authenticationUrls.login, async (req, res) => {
+  const { username, password } = req.body
+  const user = await userDatabaseApi.findByUsernameAndPassword(username, password)
+
+  if (user) {
+    req.session.loggedInUser = { username: user.username }
+    res.redirect('/posts')
+  }
+
+  res.render('login', { message: 'Log in failed' })
+})
+
+module.exports = {
+  router,
+  authenticationUrls,
+}

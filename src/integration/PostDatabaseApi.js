@@ -1,30 +1,53 @@
-const db = require('./db');
-const postCollection = db.get('posts');
-const CategoryDatabaseApi = require('./CategoryDatabaseApi');
+const db = require('./db')
+const postCollection = db.get('posts')
 
-class PostDatabaseApi {
+const queryPosts = async (queryPipleline) => {
+  let aggregationPipeline = [
+    {
+      $lookup: {
+        from: 'categories',
+        localField: 'category_id',
+        foreignField: '_id',
+        as: 'category',
+      },
+    },
+    {
+      $addFields: {
+        category: { $arrayElemAt: ['$category', 0] },
+      },
+    },
+  ]
 
-    static async findAll() {
-        let posts = [];
-        await postCollection.find({}).then((result) => {
-            posts = result;
-        });
-        await CategoryDatabaseApi.loadCategoriesForPosts(posts);
-        return posts;
-    }
+  if (queryPipleline) {
+    aggregationPipeline.unshift(...queryPipleline)
+  }
 
-    static async findByCategory(category_id) {
-        let posts = [];
-        await postCollection.find({ category_id }).then((result) => {
-            posts = result;
-        });
-        await CategoryDatabaseApi.loadCategoriesForPosts(posts);
-        return posts;
-    }
-
-    static async search(query) {
-        return await postCollection.find({ $text: { $search: query } });
-    }
+  return await postCollection.aggregate(aggregationPipeline)
 }
 
-module.exports = PostDatabaseApi;
+module.exports = {
+  async findAll() {
+    return await queryPosts(undefined)
+  },
+  async findByCategoryAndSearchKey(categoryId, searchKey, sortBy) {
+    let queryPipeline = []
+    if (categoryId) {
+      queryPipeline.unshift({ $match: { category_id: categoryId } })
+    }
+    if (searchKey) {
+      queryPipeline.unshift({
+        $match: {
+          $or: [
+            { title: { $regex: searchKey, $options: 'i' } },
+            { description: { $regex: searchKey, $options: 'i' } },
+          ],
+        },
+      })
+    }
+    if (sortBy) {
+      queryPipeline.unshift({ $sort: { [sortBy]: 1 } })
+    }
+
+    return await queryPosts(queryPipeline)
+  },
+}

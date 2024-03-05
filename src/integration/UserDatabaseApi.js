@@ -1,14 +1,14 @@
-const db = require('./db');
-const userCollection = db.get('users');
+const db = require('./db')
+const userCollection = db.get('users')
 
-class UserDatabaseApi {
-    static async addUser(user) {
-        return await userCollection.insert(user);
-    }
-
-    static async getUserByUsername(username) {
-        return await userCollection.findOne({ username: username });
-    }
+module.exports = {
+  async addUser(user) {
+    return await userCollection.insert(user)
+  },
+  async findByUsername(username) {
+    return await userCollection.findOne({ username })
+  },
+  async findByUsernameAndPassword(username, password) {
+    return await userCollection.findOne({ username, password })
+  },
 }
-
-module.exports = UserDatabaseApi;

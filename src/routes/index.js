@@ -1,22 +1,28 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const { router: postRouter, postUrls } = require('./post-routes')
+const { router: userRouter, authenticationUrls } = require('./user-routes')
+
+const requireAuthenticationUrls = [...Object.values(postUrls).map((url) => `/posts${url}`)]
+/* Register middleware to handle redirect to login page */
+router.use((req, res, next) => {
+  const { path } = req
+  const isUserLoggedIn = !!req.session.loggedInUser
+
+  const isRequireAuthenticate = requireAuthenticationUrls.includes(path)
+
+  if (!isUserLoggedIn && isRequireAuthenticate) {
+    res.redirect(authenticationUrls.login)
+  }
+
+  next()
+})
 
 /* Register route for home page. */
-router.get('/', function(req, res) {
-  res.render('index');
-});
+router.get('/', function (req, res) {
+  res.render('index')
+})
+router.use('/', userRouter)
+router.use('/posts', postRouter)
 
-/* Register middleware to handle redirect to login page */
-// router.use((req, res, next) => {
-  // const { path } = req;
-  // const loggedInUser = req.session.loggedInUser;
-  // if (!loggedInUser && path !== '/users/authenticate') {
-  //     return res.redirect('/users/login');
-  // }
-  // if ((loggedInUser && path === '/users/login') || (loggedInUser && path === '/users/register')) {
-  //     return res.redirect('/posts');
-  // }
-  // next();
-// });
-
-module.exports = router;
+module.exports = router

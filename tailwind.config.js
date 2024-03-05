@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  content: ["./src/views/**/*.hbs", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./src/views/**/*.hbs', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {
     extend: {},
@@ -13,7 +13,7 @@ module.exports = {
         400: '#E43A19',
         500: '#F9F9F9',
         600: '#637282',
-      }
+      },
     },
     fontFamily: {
       Montserrat: ['Montserrat'],

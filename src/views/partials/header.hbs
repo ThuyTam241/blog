@@ -34,9 +34,16 @@
           href='#'
         >Contact Us</a></li>
     </ul>
-    <div class='hidden peer-checked:block mt-3 lg:mt-0 lg:flex space-x-3'>
-      <button class='btn-nav' onclick="window.location.href='#';">Sign up</button>
-      <button class='btn-nav' onclick="window.location.href='#';">Login</button>
-    </div>
+    {{#if currentUser}}
+      <div class='hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3'>
+        <div class='h-5'>{{currentUser.username}}</div>
+        <button class='btn-nav' onclick="window.location.href='/logout';">Sign out</button>
+      </div>
+    {{else}}
+      <div class='hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3'>
+        <button class='btn-nav' onclick="window.location.href='/register';">Sign up</button>
+        <button class='btn-nav' onclick="window.location.href='/login';">Login</button>
+      </div>
+    {{/if}}
   </nav>
 </header>

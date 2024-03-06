@@ -7,14 +7,15 @@ const requireAuthenticationUrls = [...Object.values(postUrls).map((url) => `/pos
 /* Register middleware to handle redirect to login page */
 router.use((req, res, next) => {
   const { path } = req
-  const isUserLoggedIn = !!req.session.loggedInUser
+  const loggedInUser = req.session.loggedInUser
 
   const isRequireAuthenticate = requireAuthenticationUrls.includes(path)
 
-  if (!isUserLoggedIn && isRequireAuthenticate) {
+  if (!loggedInUser && isRequireAuthenticate) {
     res.redirect(authenticationUrls.login)
   }
 
+  res.locals.currentUser = loggedInUser
   next()
 })
 

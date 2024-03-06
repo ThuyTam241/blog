@@ -5,6 +5,7 @@ const userDatabaseApi = require('../integration/UserDatabaseApi')
 const authenticationUrls = {
   login: '/login',
   register: '/register',
+  logout: '/logout',
 }
 
 // Redirect to login page when accessing the /login
@@ -14,6 +15,12 @@ router.get(authenticationUrls.login, (req, res) => {
     res.redirect('/posts')
   }
   res.render('login')
+})
+
+// Redirect to login page when accessing the /logout
+router.get(authenticationUrls.logout, (req, res) => {
+  req.session.loggedInUser = undefined
+  res.redirect('login')
 })
 
 // Redirect to register page when accessing the /register

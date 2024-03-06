@@ -136,30 +136,30 @@
 
         <!-- Pagination -->
         <div class="flex justify-center mt-10">
-            <a href="#" class="group page">
+            {{!-- <a class="group page">
                 <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path class="group-hover:fill-secondary-200"
                         d="M8 0.808608V11.1914C8 11.9104 6.97817 12.2704 6.38057 11.762L0.277835 6.57063C-0.0926115 6.2555 -0.0926115 5.74452 0.277835 5.42939L6.38057 0.237991C6.97817 -0.270408 8 0.0896672 8 0.808608Z"
                         fill="#111F4D" />
                 </svg>
-            </a>
-            <a href="#" class="group page">1</a>
-            <a href="#" class="group page">2</a>
-            <a href="#" class="group page">3</a>
-            <div
+            </a> --}}
+            {{#each paginationNumbers}}
+                <a class="group page" id="pagination-btn-{{this}}" page="{{this}}">{{this}}</a>
+            {{/each}}
+            {{!-- <div
                 class="flex items-center justify-center w-10 h-10 bg-secondary-200 text-base font-bold font-Montserrat text-primary">
-                ...</div>
-            <a href="#" class="group page">8</a>
-            <a href="#" class="group page">9</a>
-            <a href="#" class="group page">
+                ...</div> --}}
+            {{!-- <a class="group page">
                 <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path class="group-hover:fill-secondary-200"
                         d="M0 11.1914V0.80859C0 0.0896493 1.02183 -0.270386 1.61943 0.237973L7.72217 5.42937C8.09261 5.7445 8.09261 6.25548 7.72217 6.57061L1.61943 11.762C1.02183 12.2704 0 11.9103 0 11.1914Z"
                         fill="#111F4D" />
                 </svg>
-            </a>
+            </a> --}}
         </div>
     </div>
 </main>
 
 {{> footer}}
+
+<script src="javascript/post-collection.js"></script>

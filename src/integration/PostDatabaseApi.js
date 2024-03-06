@@ -1,7 +1,9 @@
 const db = require('./db')
 const postCollection = db.get('posts')
+const { ITEMS_PER_PAGE } = require('./constant')
 
-const queryPosts = async (queryPipleline) => {
+const queryPosts = async (queryPipleline, page = 1) => {
+  const start = (page - 1) * ITEMS_PER_PAGE
   let aggregationPipeline = [
     {
       $lookup: {
@@ -22,14 +24,34 @@ const queryPosts = async (queryPipleline) => {
     aggregationPipeline.unshift(...queryPipleline)
   }
 
-  return await postCollection.aggregate(aggregationPipeline)
+  const aggregationPipelineForQueryPosts = aggregationPipeline.concat([
+    {
+      $skip: start,
+    },
+    {
+      $limit: ITEMS_PER_PAGE,
+    },
+  ])
+
+  const aggregationPipelineForCount = aggregationPipeline.concat([
+    {
+      $count: 'totalItems',
+    },
+  ])
+
+  const [totalCount] = await postCollection.aggregate(aggregationPipelineForCount)
+  const totalItems = totalCount ? totalCount.totalItems : 0
+
+  const posts = await postCollection.aggregate(aggregationPipelineForQueryPosts)
+
+  return { posts, totalItems }
 }
 
 module.exports = {
-  async findAll() {
-    return await queryPosts(undefined)
+  async findAll(page) {
+    return await queryPosts(undefined, page)
   },
-  async findByCategoryAndSearchKey(categoryId, searchKey, sortBy) {
+  async findByCategoryAndSearchKey(categoryId, searchKey, sortBy, page) {
     let queryPipeline = []
     if (categoryId) {
       queryPipeline.unshift({ $match: { category_id: categoryId } })
@@ -48,6 +70,6 @@ module.exports = {
       queryPipeline.unshift({ $sort: { [sortBy]: 1 } })
     }
 
-    return await queryPosts(queryPipeline)
+    return await queryPosts(queryPipeline, page)
   },
 }

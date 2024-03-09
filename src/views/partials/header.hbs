@@ -36,7 +36,7 @@
     </ul>
     {{#if currentUser}}
       <div class='hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3'>
-        <div class='h-5'>{{currentUser.username}}</div>
+        <div class='h-5'>{{currentUser.name}}</div>
         <button class='btn-nav' onclick="window.location.href='/logout';">Sign out</button>
       </div>
     {{else}}

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userDatabaseApi = require('../integration/UserDatabaseApi')
+const { getLoggedInUser, setLoggedInUser } = require('../helpers/cacheHelpers')
 
 const authenticationUrls = {
   login: '/login',
@@ -10,8 +11,8 @@ const authenticationUrls = {
 
 // Redirect to login page when accessing the /login
 router.get(authenticationUrls.login, (req, res) => {
-  const isUserLoggedIn = !!req.session.loggedInUser
-  if (isUserLoggedIn) {
+  const loggedInUser = getLoggedInUser()
+  if (!!loggedInUser) {
     res.redirect('/posts')
   }
   res.render('login')
@@ -19,7 +20,7 @@ router.get(authenticationUrls.login, (req, res) => {
 
 // Redirect to login page when accessing the /logout
 router.get(authenticationUrls.logout, (req, res) => {
-  req.session.loggedInUser = undefined
+  setLoggedInUser(null)
   res.redirect('login')
 })
 
@@ -48,7 +49,7 @@ router.post(authenticationUrls.login, async (req, res) => {
   const user = await userDatabaseApi.findByUsernameAndPassword(username, password)
 
   if (user) {
-    req.session.loggedInUser = { username: user.username }
+    setLoggedInUser(user)
     res.redirect('/posts')
   }
 

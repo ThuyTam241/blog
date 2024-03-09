@@ -2,12 +2,13 @@ const express = require('express')
 const router = express.Router()
 const { router: postRouter, postUrls } = require('./post-routes')
 const { router: userRouter, authenticationUrls } = require('./user-routes')
+const { getLoggedInUser } = require('../helpers/cacheHelpers')
 
 const requireAuthenticationUrls = [...Object.values(postUrls).map((url) => `/posts${url}`)]
 /* Register middleware to handle redirect to login page */
 router.use((req, res, next) => {
   const { path } = req
-  const loggedInUser = req.session.loggedInUser
+  const loggedInUser = getLoggedInUser()
 
   const isRequireAuthenticate = requireAuthenticationUrls.includes(path)
 

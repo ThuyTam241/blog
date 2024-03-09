@@ -1,6 +1,5 @@
 [
   {
-    "_id": "post1",
     "title": "10 Tips for Healthy Living",
     "description": "An introduction to Node.js and its features.",
     "content": "...",
@@ -11,7 +10,6 @@
     "created_date": "2024-02-28T08:00:00Z"
   },
   {
-    "_id": "post2",
     "title": "Exploring New Places: A Travel Diary",
     "description": "Exploring the benefits of using MongoDB in web development.",
     "content": "...",
@@ -22,7 +20,6 @@
     "created_date": "2024-02-27T12:30:00Z"
   },
   {
-    "_id": "post3",
     "title": "Cooking Adventures: Recipes from Around the World",
     "description": "Best practices for building RESTful APIs with Express.js.",
     "content": "...",
@@ -33,7 +30,6 @@
     "created_date": "2024-02-26T10:45:00Z"
   },
   {
-    "_id": "post4",
     "title": "Fitness Tips: Getting in Shape for Summer",
     "description": "Understanding the concept of middleware in Express.js applications.",
     "content": "...",
@@ -44,7 +40,6 @@
     "created_date": "2024-02-25T15:20:00Z"
   },
   {
-    "_id": "post5",
     "title": "Gardening 101: A Beginner's Guide",
     "description": "Tips and tricks",
     "content": "...",

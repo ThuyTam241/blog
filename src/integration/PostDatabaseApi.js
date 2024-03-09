@@ -1,5 +1,7 @@
 const db = require('./db')
 const postCollection = db.get('posts')
+const categoryCollection = db.get('categories')
+const userCollection = db.get('users')
 const { ITEMS_PER_PAGE } = require('./constant')
 
 const queryPosts = async (queryPipleline, page = 1) => {
@@ -14,8 +16,17 @@ const queryPosts = async (queryPipleline, page = 1) => {
       },
     },
     {
+      $lookup: {
+        from: 'users',
+        localField: 'author_id',
+        foreignField: '_id',
+        as: 'author',
+      },
+    },
+    {
       $addFields: {
         category: { $arrayElemAt: ['$category', 0] },
+        author: { $arrayElemAt: ['$author', 0] },
       },
     },
   ]
@@ -71,5 +82,25 @@ module.exports = {
     }
 
     return await queryPosts(queryPipeline, page)
+  },
+  async findById(postId) {
+    const post = await postCollection.findOne({ _id: postId })
+    const category = await categoryCollection.findOne({ _id: post.category_id })
+    const author = await userCollection.findOne({ _id: post.author_id })
+
+    return { post, category, author }
+  },
+  async likePost(postId, userId) {
+    const post = await postCollection.findOne({ _id: postId })
+    if (!post) {
+      throw new Error('Post not found')
+    }
+
+    const likesIndex = post.likes.map((id) => id.toString()).includes(userId.toString())
+    if (likesIndex) {
+      await postCollection.update({ _id: postId }, { $pull: { likes: userId } })
+    } else {
+      await postCollection.update({ _id: postId }, { $push: { likes: userId } })
+    }
   },
 }

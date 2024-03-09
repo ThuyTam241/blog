@@ -79,7 +79,7 @@
         <div class="flex flex-wrap gap-7">
             {{#each posts}}
             <!-- Card -->
-                <div class="card hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)]" onclick="window.location.href='#'">
+                <div id="card-post-{{_id}}" class="card hover:shadow-[0_2px_8px_0_rgba(0,0,0,0.08)]">
                     <img src="./image/food.jpg" alt="Photo" class="w-full aspect-[3/2] object-cover">
                     <div class="py-2.5 px-6">
                         <div class="grid grid-cols-1 grid-row-4 gap-y-1">
@@ -118,7 +118,7 @@
                         <div class="flex items-center mt-auto space-x-2">
                             <img src="/image/author-avatar.jpg" alt="User Avatar" class="w-12 h-12 rounded-full">
                             <div class="flex flex-col">
-                                <h2 class="text-lg font-bold font-Montserrat text-primary">{{author_id}}</h2>
+                                <h2 class="text-lg font-bold font-Montserrat text-primary">{{author.name}}</h2>
                                 <div class="flex items-center space-x-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" class="w-[18px] h-[18px] stroke-secondary-600">
@@ -162,4 +162,4 @@
 
 {{> footer}}
 
-<script src="javascript/post-collection.js"></script>
+<script src="/javascript/post-collection.js"></script>

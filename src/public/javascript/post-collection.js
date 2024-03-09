@@ -12,6 +12,14 @@ document.querySelectorAll('[id^="pagination-btn"]').forEach((paginationBtnEl) =>
   })
 })
 
+// Add logic to redirect to post detail when clicking on the card post
+document.querySelectorAll('[id^="card-post-"]').forEach((cardPostEl) => {
+  cardPostEl.addEventListener('click', () => {
+    const postId = cardPostEl.id.replace('card-post-', '')
+    window.location.href = `/posts/${postId}`
+  })
+})
+
 const createNewUrl = (currentUrl, pageNumber) => {
   let newUrl
   if (currentUrl.includes('?')) {

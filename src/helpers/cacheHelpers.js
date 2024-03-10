@@ -1,14 +1,14 @@
-let loggedInUser = null
+let loggedInUser = null;
 
 function setLoggedInUser(user) {
-  loggedInUser = user
+  loggedInUser = user;
 }
 
 function getLoggedInUser() {
-  return loggedInUser
+  return loggedInUser;
 }
 
 module.exports = {
   setLoggedInUser,
   getLoggedInUser,
-}
+};

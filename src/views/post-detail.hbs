@@ -69,9 +69,9 @@
 
     <!-- Post comment -->
     <div class="w-full bg-secondary-200 p-6 rounded-lg">
-        <form action="" class="flex flex-col px-3 py-2 border-2 border-secondary-100 rounded-lg">
+        <form id="comment-form" post-id="{{post._id}}" class="flex flex-col px-3 py-2 border-2 border-secondary-100 rounded-lg">
             <textarea class="w-full font-normal resize-none text-base text-secondary-300 font-Hindmadurai outline-none"
-                rows="4" name="comment" placeholder="Add your comment..." id="comment" required></textarea>
+                rows="4" name="content" placeholder="Add your comment..." id="comment" required></textarea>
             <button type="submit"
                 class="flex items-center ml-auto mt-2 px-3 py-2 rounded-lg bg-primary space-x-1 hover:bg-secondary-400 transition duration-300 ease-in-out">
                 <span class="text-base text-secondary-200 font-normal font-Montserrat">Send</span>
@@ -83,26 +83,24 @@
             </button>
         </form>
         <div class="mt-7 space-y-5">
+            {{#each comments}}
             <div class="space-y-1">
                 <div class="flex items-center space-x-2">
                     <img src="/image/author-avatar.jpg" alt="User Avatar" class="w-12 h-12 rounded-full">
                     <div>
-                        <h2 class="text-lg font-bold font-Montserrat text-primary">Marina</h2>
+                        <h2 class="text-lg font-bold font-Montserrat text-primary">{{user.name}}</h2>
                         <div class="flex items-center space-x-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                 stroke="currentColor" class="w-[18px] h-[18px] stroke-secondary-600">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                            <span class="text-base font-normal font-Hindmadurai text-secondary-600">Jan 24, 2023</span>
+                            <span class="text-base font-normal font-Hindmadurai text-secondary-600">{{formatDate created_date}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="ml-14 space-y-1">
-                    <p class="text-lg text-secondary-300 font-normal font-Hindmadurai">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Aperiam autem eius porro minima quam delectus quisquam rerum,
-                        tempora perferendis repellat facilis aspernatur ut exercitationem inventore earum! Accusamus
-                        iure esse vero.</p>
+                    <p class="text-lg text-secondary-300 font-normal font-Hindmadurai">{{content}}</p>
                     <div class="space-x-5">
                         <span
                             class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Reply</span>
@@ -113,8 +111,10 @@
                     </div>
                 </div>
             </div>
+            {{/each}}
             <!-- Reply Comment -->
-            <div class="ml-14 space-y-1">
+            {{!-- TODO: Upcomming soon --}}
+            {{!-- <div class="ml-14 space-y-1">
                 <div class="flex items-center space-x-2">
                     <img src="/image/author-avatar.jpg" alt="User Avatar" class="w-12 h-12 rounded-full">
                     <div class="flex flex-col">
@@ -143,7 +143,7 @@
                             class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Remove</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </main>

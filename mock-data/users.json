@@ -1,13 +1,13 @@
 [
   {
-    "_id": "user1",
     "name": "John Doe",
     "email": "john@example.com",
+    "username": "john_doe",
     "password": "12345"
   },
   {
-    "_id": "user2",
     "name": "Jane Smith",
+    "username": "jane_smith",
     "email": "jane@example.com",
     "password": "12345"
   }

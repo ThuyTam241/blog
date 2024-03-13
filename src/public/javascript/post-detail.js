@@ -40,8 +40,6 @@ formEl.addEventListener('submit', async ($event) => {
 });
 
 // Add logic to display textarea to update comment
-const updateCommentTextareaEl = document.getElementById('update-comment-textarea');
-
 document.querySelectorAll('[id^="update-comment-btn-"]').forEach((updateCommentBtnEl) => {
   updateCommentBtnEl.addEventListener('click', () => {
     // Select the textare match with current edit button in this loop
@@ -96,7 +94,6 @@ document.querySelectorAll('[id^="update-comment-textarea-"]').forEach((updateCom
 });
 
 // Add logic to delete the comment
-
 document.querySelectorAll('[id^="delete-comment-btn-"]').forEach((deleteCommentBtnEl) => {
   deleteCommentBtnEl.addEventListener('click', (event) => {
     const commentId = deleteCommentBtnEl.getAttribute('comment-id');
@@ -112,6 +109,53 @@ document.querySelectorAll('[id^="delete-comment-btn-"]').forEach((deleteCommentB
       });
     } catch (error) {
       console.error('Error:', error);
+    }
+  });
+});
+
+// Add logic to display textarea to reply comment
+document.querySelectorAll('[id^="reply-comment-btn-"]').forEach((replyCommentBtnEl) => {
+  replyCommentBtnEl.addEventListener('click', () => {
+    // Select the textare match with current reply button in this loop
+    const textareaId = replyCommentBtnEl.id.replace('btn', 'textarea');
+    const textareaEl = document.getElementById(textareaId);
+
+    // Show textarea to reply the comment
+    textareaEl.parentElement.classList.remove('hidden');
+    textareaEl.focus();
+
+    // Place the cursor at the end of the textarea content
+    const contentLength = textareaEl.value.length;
+    textareaEl.setSelectionRange(contentLength, contentLength);
+  });
+});
+
+document.querySelectorAll('[id^="reply-comment-textarea-"]').forEach((replyCommentTextareaEl) => {
+  const commentId = replyCommentTextareaEl.getAttribute('comment-id');
+
+  replyCommentTextareaEl.addEventListener('blur', () => {
+    // Hide the textarea
+    replyCommentTextareaEl.parentElement.classList.add('hidden');
+  });
+
+  replyCommentTextareaEl.addEventListener('keypress', (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+
+      const content = event.target.value;
+      try {
+        fetch(`/comments/${commentId}/reply`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content }),
+        }).then(() => {
+          window.location.reload();
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   });
 });

@@ -23,4 +23,20 @@ module.exports = {
       user_id: new ObjectId(user_id),
     });
   },
+  async replyComment(_id, user_name, content) {
+    if (!_id || !user_name || !content) {
+      throw new Error('Bad request');
+    }
+    const replyingComment = {
+      user: user_name,
+      content,
+      created_date: Date.now(),
+    };
+
+    return await commentCollection.findOneAndUpdate(
+      { _id },
+      { $push: { repliedComments: replyingComment } },
+      { returnOriginal: false },
+    );
+  },
 };

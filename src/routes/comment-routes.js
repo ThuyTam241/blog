@@ -4,13 +4,13 @@ const commentDatabaseApi = require('../integration/CommentDatabaseApi');
 const { getLoggedInUser } = require('../helpers/cacheHelpers');
 
 const commentUrls = {
-  updateComment: '/:id/update',
-  deleteComment: '/:id/delete',
+  updateComment: '/:id',
+  deleteComment: '/:id',
   replyComment: '/:id/reply',
 };
 
 // Register url to update comment
-router.post(commentUrls.updateComment, async (req, res) => {
+router.put(commentUrls.updateComment, async (req, res) => {
   const { id } = req.params;
   const { content } = req.body;
   const currentUser = getLoggedInUser();
@@ -25,6 +25,24 @@ router.post(commentUrls.updateComment, async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).send('An error occurred while updating the comment');
+  }
+});
+
+// Register url to delete comment
+router.delete(commentUrls.deleteComment, async (req, res) => {
+  const { id } = req.params;
+  const currentUser = getLoggedInUser();
+  if (!currentUser) {
+    res.redirect(authenticationUrls.login);
+    return;
+  }
+
+  try {
+    await commentDatabaseApi.deleteComment(id, currentUser._id);
+    return res.status(200).send(`Updated comment with id=${id}`);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('An error occurred while deleting the comment');
   }
 });
 

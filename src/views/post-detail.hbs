@@ -110,14 +110,18 @@
                         <span
                             class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Reply</span>
                             <div id="update-comment-btn-{{_id}}" style="width: fit-content; margin:0; display: inline-block">
-{{#compareIds user_id @root.currentUser._id}}
-                                <span 
-                                    class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400" style="margin-left: 20px;">Edit</span>
-                            {{/compareIds}}
+                                {{#compareIds user_id @root.currentUser._id}}
+                                    <span 
+                                        class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400" style="margin-left: 20px;">Edit</span>
+                                {{/compareIds}}
                             </div>
                             
-                                <span
-                            class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Remove</span>
+                            <div id="delete-comment-btn-{{_id}}" comment-id="{{_id}}" style="width: fit-content; margin:0; display: inline-block">
+                                {{#compareIds user_id @root.currentUser._id}}
+                                    <span
+                                        class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400" style="margin-left: 20px;">Remove</span>
+                                {{/compareIds}}
+                            </div>
                     </div>
                 </div>
             </div>

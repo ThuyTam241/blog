@@ -48,6 +48,10 @@ document.querySelectorAll('[id^="update-comment-btn-"]').forEach((updateCommentB
     const textareaId = updateCommentBtnEl.id.replace('btn', 'textarea');
     const textareaEl = document.getElementById(textareaId);
 
+    // Hide the content text
+    const commentId = textareaEl.getAttribute('comment-id');
+    document.getElementById(`comment-content-${commentId}`).classList.add('hidden');
+
     // Show textarea to edit the comment
     textareaEl.parentElement.classList.remove('hidden');
     textareaEl.focus();
@@ -59,8 +63,14 @@ document.querySelectorAll('[id^="update-comment-btn-"]').forEach((updateCommentB
 });
 
 document.querySelectorAll('[id^="update-comment-textarea-"]').forEach((updateCommentTextareaEl) => {
+  const commentId = updateCommentTextareaEl.getAttribute('comment-id');
+
   updateCommentTextareaEl.addEventListener('blur', () => {
+    // Hide the textarea
     updateCommentTextareaEl.parentElement.classList.add('hidden');
+
+    // Show the text content
+    document.getElementById(`comment-content-${commentId}`).classList.remove('hidden');
   });
 
   updateCommentTextareaEl.addEventListener('keypress', (event) => {
@@ -68,11 +78,9 @@ document.querySelectorAll('[id^="update-comment-textarea-"]').forEach((updateCom
       event.preventDefault();
 
       const content = event.target.value;
-      const commentId = updateCommentTextareaEl.getAttribute('comment-id');
-
       try {
-        fetch(`/comments/${commentId}/update`, {
-          method: 'POST',
+        fetch(`/comments/${commentId}`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -83,6 +91,27 @@ document.querySelectorAll('[id^="update-comment-textarea-"]').forEach((updateCom
       } catch (error) {
         console.error('Error:', error);
       }
+    }
+  });
+});
+
+// Add logic to delete the comment
+
+document.querySelectorAll('[id^="delete-comment-btn-"]').forEach((deleteCommentBtnEl) => {
+  deleteCommentBtnEl.addEventListener('click', (event) => {
+    const commentId = deleteCommentBtnEl.getAttribute('comment-id');
+
+    try {
+      fetch(`/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(() => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.error('Error:', error);
     }
   });
 });

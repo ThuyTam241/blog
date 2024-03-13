@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const { router: postRouter, postUrls } = require('./post-routes');
+const { router: commentRouter, commentUrls } = require('./comment-routes');
 const { router: userRouter, authenticationUrls } = require('./user-routes');
 const { getLoggedInUser } = require('../helpers/cacheHelpers');
 
-const requireAuthenticationUrls = [...Object.values(postUrls).map((url) => `/posts${url}`)];
+const requireAuthenticationUrls = [
+  ...Object.values(postUrls).map((url) => `/posts${url}`),
+  ...Object.values(commentUrls).map((url) => `/comments${url}`),
+];
 /* Register middleware to handle redirect to login page */
 router.use((req, res, next) => {
   const { path } = req;
@@ -26,5 +30,6 @@ router.get('/', function (req, res) {
 });
 router.use('/', userRouter);
 router.use('/posts', postRouter);
+router.use('/comments', commentRouter);
 
 module.exports = router;

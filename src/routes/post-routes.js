@@ -12,9 +12,6 @@ const postUrls = {
   detailPost: '/:id',
   likePost: '/:id/action/like',
   commentPost: '/:id/action/comment',
-  createPosts: '/create',
-  updatePosts: '/update/:id',
-  deletePosts: '/delete/:id',
 };
 
 // Register url to go to the list of posts page

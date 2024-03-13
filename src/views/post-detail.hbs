@@ -95,18 +95,28 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                            <span class="text-base font-normal font-Hindmadurai text-secondary-600">{{formatDate created_date}}</span>
+                            <span class="text-base font-normal font-Hindmadurai text-secondary-600">{{formatDateTime created_date}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="ml-14 space-y-1">
-                    <p class="text-lg text-secondary-300 font-normal font-Hindmadurai">{{content}}</p>
+                    <p id="comment-content-{{_id}}" class="text-lg text-secondary-300 font-normal font-Hindmadurai">{{content}}</p>
+                    <div class="hidden border-2 border-secondary-100 rounded-lg px-3 py-2">
+                        <textarea id="update-comment-textarea-{{_id}}" comment-id="{{_id}}" class="w-full font-normal resize-none text-base text-secondary-300 font-Hindmadurai outline-none"
+                        rows="3" name="content"> {{content}} </textarea>
+                    </div>
+                    
                     <div class="space-x-5">
                         <span
                             class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Reply</span>
-                        <span
-                            class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Edit</span>
-                        <span
+                            <div id="update-comment-btn-{{_id}}" style="width: fit-content; margin:0; display: inline-block">
+{{#compareIds user_id @root.currentUser._id}}
+                                <span 
+                                    class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400" style="margin-left: 20px;">Edit</span>
+                            {{/compareIds}}
+                            </div>
+                            
+                                <span
                             class="text-primary text-base font-normal font-Hindmadurai cursor-pointer hover:text-secondary-400">Remove</span>
                     </div>
                 </div>

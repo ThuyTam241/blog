@@ -5,7 +5,7 @@ const logger = require('morgan');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const momentHelper = require('./helpers/momentHelper');
+const handleBarHelpers = require('./helpers/handlebarHelper');
 
 const app = express();
 const routes = require('./routes/index');
@@ -18,7 +18,7 @@ app.engine(
     defaultLayout: 'main',
     extname: '.hbs',
     helpers: {
-      ...momentHelper,
+      ...handleBarHelpers,
     },
   }),
 );

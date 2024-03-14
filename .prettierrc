@@ -3,5 +3,14 @@
   "semi": true,
   "tabWidth": 2,
   "printWidth": 100,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.hbs",
+      "options": {
+        "singleQuote": false,
+        "tabWidth": 2
+      }
+    }
+  ]
 }

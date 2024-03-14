@@ -4,6 +4,7 @@ const categoryCollection = db.get('categories');
 const userCollection = db.get('users');
 const commentCollection = db.get('comments');
 const { ITEMS_PER_PAGE } = require('./constant');
+const { ObjectId } = require('mongodb');
 
 const queryPosts = async (queryPipleline, page = 1) => {
   const start = (page - 1) * ITEMS_PER_PAGE;
@@ -128,7 +129,7 @@ module.exports = {
     }
 
     const newComment = await commentCollection.insert({
-      post_id: postId,
+      post_id: new ObjectId(postId),
       user_id: userId,
       content,
       created_date: Date.now(),

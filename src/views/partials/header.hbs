@@ -3,46 +3,46 @@
     <a href='/' class='flex items-center max-w-max'>
       <img src='/image/logo-header.png' alt='Website Logo' />
     </a>
-    <input type='checkbox' id='navbar-toggle' class='hidden peer' />
-    <label for='navbar-toggle' class='lg:hidden cursor-pointer absolute right-0 top-0'>
+    <input type="checkbox" id="navbar-toggle" class="hidden peer" />
+    <label for="navbar-toggle" class="lg:hidden cursor-pointer absolute right-0 top-0">
       <svg
-        width='28'
-        height='24'
-        viewBox='0 0 28 24'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
+        width="28"
+        height="24"
+        viewBox="0 0 28 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d='M1 4.40816H27C27.5523 4.40816 28 3.96961 28 3.42857V0.979592C28 0.438551 27.5523 0 27 0H1C0.447688 0 0 0.438551 0 0.979592V3.42857C0 3.96961 0.447688 4.40816 1 4.40816ZM1 14.2041H27C27.5523 14.2041 28 13.7655 28 13.2245V10.7755C28 10.2345 27.5523 9.79592 27 9.79592H1C0.447688 9.79592 0 10.2345 0 10.7755V13.2245C0 13.7655 0.447688 14.2041 1 14.2041ZM1 24H27C27.5523 24 28 23.5614 28 23.0204V20.5714C28 20.0304 27.5523 19.5918 27 19.5918H1C0.447688 19.5918 0 20.0304 0 20.5714V23.0204C0 23.5614 0.447688 24 1 24Z'
-          fill='#111F4D'
+          d="M1 4.40816H27C27.5523 4.40816 28 3.96961 28 3.42857V0.979592C28 0.438551 27.5523 0 27 0H1C0.447688 0 0 0.438551 0 0.979592V3.42857C0 3.96961 0.447688 4.40816 1 4.40816ZM1 14.2041H27C27.5523 14.2041 28 13.7655 28 13.2245V10.7755C28 10.2345 27.5523 9.79592 27 9.79592H1C0.447688 9.79592 0 10.2345 0 10.7755V13.2245C0 13.7655 0.447688 14.2041 1 14.2041ZM1 24H27C27.5523 24 28 23.5614 28 23.0204V20.5714C28 20.0304 27.5523 19.5918 27 19.5918H1C0.447688 19.5918 0 20.0304 0 20.5714V23.0204C0 23.5614 0.447688 24 1 24Z"
+          fill="#111F4D"
         />
       </svg>
     </label>
     <ul
-      class='hidden peer-checked:block lg:flex lg:justify-between mt-3 lg:mt-0 lg:space-x-11 space-y-1 lg:space-y-0'
+      class="hidden peer-checked:block lg:flex lg:justify-between mt-3 lg:mt-0 lg:space-x-11 space-y-1 lg:space-y-0"
     >
       <li><a
-          class='text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out'
-          href='#'
+          class="text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out"
+          href="#"
         >Home</a></li>
       <li><a
-          class='text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out'
-          href='#'
+          class="text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out"
+          href="#"
         >About Us</a></li>
       <li><a
-          class='text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out'
-          href='#'
+          class="text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out"
+          href="#"
         >Contact Us</a></li>
     </ul>
     {{#if currentUser}}
-      <div class='hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3'>
-        <div class='h-5'>{{currentUser.name}}</div>
-        <button class='btn-nav' onclick="window.location.href='/logout';">Sign out</button>
+      <div class="hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3">
+        <div class="h-5">{{currentUser.name}}</div>
+        <button class="btn-nav" onclick="window.location.href='/logout';">Sign out</button>
       </div>
     {{else}}
-      <div class='hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3'>
-        <button class='btn-nav' onclick="window.location.href='/register';">Sign up</button>
-        <button class='btn-nav' onclick="window.location.href='/login';">Login</button>
+      <div class="hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3">
+        <button class="btn-nav" onclick="window.location.href='/register';">Sign up</button>
+        <button class="btn-nav" onclick="window.location.href='/login';">Login</button>
       </div>
     {{/if}}
   </nav>

@@ -24,6 +24,7 @@ module.exports = {
     });
   },
   async replyComment(_id, user_name, content) {
+    console.log("🚀 ~ replyComment ~ _id, user_name, content:", _id, user_name, content)
     if (!_id || !user_name || !content) {
       throw new Error('Bad request');
     }

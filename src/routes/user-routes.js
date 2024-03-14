@@ -53,7 +53,7 @@ router.post(authenticationUrls.login, async (req, res) => {
     res.redirect('/posts');
   }
 
-  res.render('login', { message: 'Log in failed' });
+  res.render('login', { message: 'Log in failed', error: true });
 });
 
 module.exports = {

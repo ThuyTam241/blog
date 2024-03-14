@@ -15,7 +15,7 @@
             <div class="flex items-center space-x-6">
                 <div class="flex items-center space-x-2">
                     <img src="/image/author-avatar.jpg" alt="User Avatar" class="w-8 h-8 rounded-full">
-                    <h2 class="text-lg font-bold font-Montserrat text-primary">{{author.name}}</h2>
+                    <h2 class="text-lg font-bold font-Montserrat text-primary">{{author.username}}</h2>
                 </div>
                 <div class="flex items-center space-x-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -29,7 +29,6 @@
         </div>
         <div class="space-y-6 mt-10">
             <!-- Post Image -->
-            {{!-- TODO: Consider removing this part. Because we allow the user write their own image in content --}}
             <img src="/image/food.jpg" alt="Photo" class="w-full rounded-lg aspect-[3/2] object-cover">
             <!-- Post Content -->
             <div>
@@ -39,7 +38,7 @@
         <div class="h-[2px] my-6 bg-secondary-100"></div>
         <!-- Post Like and Comment -->
         <div class="flex space-x-8">
-            <div class="flex items-center space-x-1">
+            <div class="flex items-center space-x-1 cursor-pointer">
                 {{!-- TODO: Adjust the css of liked and non-liked button --}}
                 {{#if liked}}
                     <svg id="like-action" data-id="{{post._id}}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -88,7 +87,7 @@
                     <div class="flex items-center space-x-2">
                         <img src="/image/author-avatar.jpg" alt="User Avatar" class="w-12 h-12 rounded-full">
                         <div>
-                            <h2 class="text-lg font-bold font-Montserrat text-primary">{{user.name}}</h2>
+                            <h2 class="text-lg font-bold font-Montserrat text-primary">{{user.username}}</h2>
                             <div class="flex items-center space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                     stroke="currentColor" class="w-[18px] h-[18px] stroke-secondary-600">

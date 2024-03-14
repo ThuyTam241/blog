@@ -67,7 +67,7 @@ module.exports = {
   async findByCategoryAndSearchKey(categoryId, searchKey, sortBy, page) {
     let queryPipeline = [];
     if (categoryId) {
-      queryPipeline.unshift({ $match: { category_id: categoryId } });
+      queryPipeline.unshift({ $match: { category_id: new ObjectId(categoryId) } });
     }
     if (searchKey) {
       queryPipeline.unshift({
@@ -133,6 +133,7 @@ module.exports = {
       user_id: userId,
       content,
       created_date: Date.now(),
+      repliedComments: [],
     });
     await postCollection.update({ _id: postId }, { $push: { comments: newComment._id } });
   },

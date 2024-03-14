@@ -23,7 +23,7 @@
     >
       <li><a
           class="text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out"
-          href="#"
+          href="/posts"
         >Home</a></li>
       <li><a
           class="text-lg font-bold text-primary font-Montserrat hover:text-secondary-400 transition duration-300 ease-in-out"
@@ -36,7 +36,7 @@
     </ul>
     {{#if currentUser}}
       <div class="hidden peer-checked:block mt-3 lg:mt-0 lg:flex items-center space-x-3">
-        <div class="h-5">{{currentUser.name}}</div>
+        <div class="h-5 text-lg font-bold text-primary font-Montserrat">{{currentUser.username}}</div>
         <button class="btn-nav" onclick="window.location.href='/logout';">Sign out</button>
       </div>
     {{else}}
